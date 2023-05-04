@@ -4,11 +4,12 @@ GOARCH=amd64
 
 target = bin/${GOOS}
 
-all: echoserver primetime means
+all: echoserver primetime means budgetchat
 
 echoserver: ${target}/echosrvr
 primetime: ${target}/primetime
 means: ${target}/means
+budgetchat: ${target}/budgetchat
 
 ${target}/echosrvr: ./echoserver/$(wildcard *.go)
 	@mkdir -p ${target}
@@ -22,5 +23,9 @@ ${target}/means: ./means-to-an-end/*.go
 	@mkdir -p bin
 	go build -o ${target}/means ./means-to-an-end/...
 
+${target}/budgetchat: ./budgetchat/*.go
+	@mkdir -p bin
+	go build -o ${target}/budgetchat ./budgetchat/...
+	
 clean:
 	rm -rf ./bin
