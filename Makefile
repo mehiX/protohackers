@@ -4,7 +4,7 @@ GOARCH=amd64
 
 target = bin/${GOOS}
 
-all: echoserver primetime means budgetchat udpdb proxy
+all: echoserver primetime means budgetchat udpdb proxy speed
 
 echoserver: ${target}/echosrvr
 primetime: ${target}/primetime
@@ -12,6 +12,7 @@ means: ${target}/means
 budgetchat: ${target}/budgetchat
 udpdb: ${target}/udpdb
 proxy: ${target}/proxy
+speed: ${target}/speed
 
 ${target}/echosrvr: ./echoserver/$(wildcard *.go)
 	@mkdir -p ${target}
@@ -36,6 +37,10 @@ ${target}/udpdb: ./udpdb/*.go
 ${target}/proxy: ./proxy/*.go
 	@mkdir -p bin
 	go build -o ${target}/proxy ./proxy/...
+
+${target}/speed: ./speed/*.go
+	@mkdir -p bin
+	go build -o ${target}/speed ./speed/...
 
 clean:
 	rm -rf ./bin
